@@ -2,7 +2,7 @@
 #define GAME_H
 
 
-#include"State.h"
+#include"GameState.h"
 
 class Game
 {
@@ -14,9 +14,15 @@ private:
 	sf::Clock dtClock;
 	float dt;
 
+	std::stack<State*> states;
+
+	std::map<std::string, int> supportedKeys;
 
 	//Initialization
 	void initWindow(); 
+	void initStates();
+	void initKeys();
+
 
 public:
 	//Constructors/Destructors
@@ -24,10 +30,19 @@ public:
 	virtual ~Game();
 
 	//Functions
+
+	//Regular
+	void endApp();
+
+	//Update
 	void updateDt();
 	void updateSFMLEvent();
 	void update();
+	
+	//Render
 	void render();
+	
+	//Core
 	void run();
 
 };
